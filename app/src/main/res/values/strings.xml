@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Marvel</string>
+
+    <!-- error -->
+    <string name="error_io">There is an IOException error</string>
+    <string name="error_http">There is a HttpException error</string>
+    <string name="error">There is an error</string>
+
+    <!-- home -->
+    <string name="home_action_retry">Reintentar</string>
+
+    <!-- character detail -->
+    <string name="character_detail_exit">Salir</string>
+
+</resources>

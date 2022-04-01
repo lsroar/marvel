@@ -1,0 +1,105 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+}
+
+apply from: "../configuration.gradle"
+apply from: "$project.rootDir/ktLintGradleConfig/ktLintConfig.gradle"
+
+android {
+
+    with configuration
+
+    compileSdk 32
+
+    defaultConfig {
+        minSdk 23
+        targetSdk 32
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+    productFlavors {
+        mock {
+            dimension "environment"
+            buildConfigField("String", "MARVEL_URL_BASE", "\"https://gateway.marvel.com:443\"")
+            buildConfigField("String", "MARVEL_TS", properties.getProperty('ts'))
+            buildConfigField("String", "MARVEL_APIKEY", properties.getProperty('apikey'))
+            buildConfigField("String", "MARVEL_HASH", properties.getProperty('hash'))
+        }
+        dev {
+            dimension "environment"
+            buildConfigField("String", "MARVEL_URL_BASE", "\"https://gateway.marvel.com:443\"")
+            buildConfigField("String", "MARVEL_TS", properties.getProperty('ts'))
+            buildConfigField("String", "MARVEL_APIKEY", properties.getProperty('apikey'))
+            buildConfigField("String", "MARVEL_HASH", properties.getProperty('hash'))
+
+        }
+        pro {
+            dimension "environment"
+            buildConfigField("String", "MARVEL_URL_BASE", "\"https://gateway.marvel.com:443\"")
+            buildConfigField("String", "MARVEL_TS", properties.getProperty('ts'))
+            buildConfigField("String", "MARVEL_APIKEY", properties.getProperty('apikey'))
+            buildConfigField("String", "MARVEL_HASH", properties.getProperty('hash'))
+        }
+    }
+
+}
+
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.appcompat:appcompat:1.4.0'
+    implementation 'com.google.android.material:material:1.4.0'
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    // Koin for Android
+    implementation "io.insert-koin:koin-android:$koin_version"
+
+    // Koin for Android
+    implementation "io.insert-koin:koin-android:$koin_version"
+
+    // Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+
+    //Okhttp3
+    implementation "com.squareup.okhttp3:okhttp:$okhttp3_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3_version"
+
+    // Retrofit2
+    implementation "com.squareup.retrofit2:retrofit:$retrofit2_version"
+    implementation "com.squareup.retrofit2:converter-moshi:$retrofit2_version"
+    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$retrofit2_coroutines_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$retrofit_logger_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit2_version"
+    implementation "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$rx_retrofit_adapter"
+
+    // Gson
+    implementation "com.google.code.gson:gson:$gson_version"
+
+    // Rx
+    implementation "io.reactivex.rxjava2:rxandroid:$rx_android_version"
+    implementation "io.reactivex.rxjava2:rxkotlin:$rx_kotlin_version"
+
+    // Truth
+    testImplementation "com.google.truth:truth:$truth_version"
+    androidTestImplementation "com.google.truth:truth:$truth_version"
+
+    // Koin testing tools
+    testImplementation "io.insert-koin:koin-test:$koin_version"
+    androidTestImplementation "io.insert-koin:koin-test:$koin_version"
+
+    // JUnit version
+    testImplementation "io.insert-koin:koin-test-junit4:$koin_version"
+    androidTestImplementation "io.insert-koin:koin-test-junit4:$koin_version"
+
+    // Coroutines test
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_test_version"
+
+}

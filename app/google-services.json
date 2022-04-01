@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "889421757847",
+    "project_id": "marvel-ce400",
+    "storage_bucket": "marvel-ce400.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:889421757847:android:907f76f6a4983e7add98d2",
+        "android_client_info": {
+          "package_name": "com.lsroar.marvel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "889421757847-335rbkohht9el9p427opo57gbl3s3oue.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaZZb-RpldgVe3Ft7Lh4-ZcA9kErtKQQY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "889421757847-335rbkohht9el9p427opo57gbl3s3oue.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

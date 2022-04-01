@@ -1,0 +1,48 @@
+/*
+ * https://github.com/pinterest/ktlint
+ * 
+ * Usage:
+ *
+ * on build.gradle: apply from: "$project.rootDir/ktLintGradleConfig/ktLintConfig.gradle"
+ * on android modules: preBuild.dependsOn('ktlint')
+ * on kotlin modules: compileKotlin.dependsOn('ktlint')
+ */
+
+configurations {
+    ktlint
+}
+
+dependencies {
+    ktlint "com.pinterest:ktlint:0.42.1"
+
+    // additional 3rd party ruleset(s) can be specified here
+    // just add them to the classpath (e.g. ktlint 'groupId:artifactId:version') and
+    // ktlint will pick them up
+}
+
+task ktlint(type: JavaExec, group: "verification") {
+    description = "Check Kotlin code style."
+    classpath = configurations.ktlint
+    main = "com.pinterest.ktlint.Main"
+    args "src/**/*.kt"
+    //to report in HTML:
+//    args "--reporter=html,artifact=me.cassiano:ktlint-html-reporter:0.2.0,output=$project.buildDir/reports/checkstyle/ktlint.html"
+
+    // to generate report in checkstyle format prepend following args:
+    // "--reporter=plain", "--reporter=checkstyle,output=${buildDir}/ktlint.xml"
+    // see https://github.com/shyiko/ktlint#usage for more
+    //--reporter=html,artifact=me.cassiano:ktlint-html-reporter:0.2.0,output=${reportsKotlinDir}/checkstyle/ktlint.html
+}
+
+task ktlintFormat(type: JavaExec, group: "formatting") {
+    description = "Fix Kotlin code style deviations."
+    classpath = configurations.ktlint
+    main = "com.pinterest.ktlint.Main"
+    args "-F", "src/**/*.kt"
+}
+
+ktlint.dependsOn ktlintFormat
+
+assemble.dependsOn('ktlint')
+check.dependsOn ktlint
+preBuild.dependsOn('ktlint')
