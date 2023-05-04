@@ -23,4 +23,7 @@
             <certificates src="system"/>
         </trust-anchors>
     </domain-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">i.annihil.us</domain>
+    </domain-config>
 </network-security-config>
